@@ -56,12 +56,12 @@ for i in range(0, h):
         break
 
 # Encontra o nível da água
-for i in range(0, h):
+for i in range(0, w):
     if(waterLevel != -1):
         break
-    for j in range(0, w):
-        if(tupleData[i][j] == blue):
-            waterLevel = i
+    for j in range(int(h/2), h):
+        if(tupleData[j][i] == blue):
+            waterLevel = j
             break
 
 # Encontra colunas em que há bits com água
