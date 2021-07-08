@@ -60,17 +60,10 @@ for i in range(0, groundLvl):
     for j in range(0, w):
         if(tuple(data[i, j]) == red):
             meteors += 1
-            coords.append((i, j))
+            if(j in waterCols):
+                fallOnWater += 1
         if(tuple(data[i, j]) == white):
             stars += 1
-
-# itera para verificar a trajetória dos meteoros e ver se atingem a terra
-# Usa o vetor de colunas de bits de água para verificar se algum dos meteoros possui
-# o indice da coluna igual a um indice desse vetor, se sim significa que ele vai cair
-# ná água.
-for i in coords:
-    if(i[1] in waterCols):
-        fallOnWater += 1
 
 end = time()
 
