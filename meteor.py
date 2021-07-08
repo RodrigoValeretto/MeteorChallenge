@@ -18,6 +18,9 @@ def totuple(a):
 img = Image.open('meteor_challenge_01.png')
 data = np.asarray(img)
 
+# Convertemos o array para tuplas pois é mais fácil de realizar comparações
+# Fazemos a conversão de toda a matriz pois é mais eficiente do que converter
+# toda vez que for utilizar
 tupleData = totuple(data)
 
 # Definição das cores de comparação do programa
