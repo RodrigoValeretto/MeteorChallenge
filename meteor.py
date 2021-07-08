@@ -1,5 +1,7 @@
 from PIL import Image
+from time import time
 import numpy as np
+
 
 # Abrindo imagem e gerando array de rgb dos bits
 img = Image.open('meteor_challenge_01.png')
@@ -22,6 +24,7 @@ fallOnWater = 0
 # Salvando largura e comprimento da matriz
 w, h, _ = data.shape
 
+start = time()
 # Itera para contar quantidade de estrelas e meteoros
 for i in range(0, h):
     for j in range(0, w):
@@ -39,7 +42,9 @@ for i in coords:
             fallOnWater += 1
             fallCols.add(i[1])
             break
+end = time()
 
 print("O número de meteoros encontrados foi: ", meteors)
 print("O número de estrelas encontradas foi: ", stars)
 print("O número de meteoros que cairão na água é: ", fallOnWater)
+print("Tempo de processamento: ", end - start)
