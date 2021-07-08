@@ -1,4 +1,5 @@
 from PIL import Image
+from time import time
 import numpy as np
 
 # Abrindo imagem e gerando array de rgb dos bits
@@ -31,6 +32,7 @@ h, w, _ = data.shape
 # Encontra o nível do chão
 # Fizemos aqui uma estimativa pois ao observar a imagem percebemos que próximo ao centro
 # possuímos um nível mais alto de chão podendo cortar mais iterações
+start = time()
 wcentro = int(w/2)
 for i in range(0, h):
     if(tuple(data[i, wcentro]) == black):
@@ -70,7 +72,10 @@ for i in coords:
     if(i[1] in waterCols):
         fallOnWater += 1
 
+end = time()
+
 # Exibe os resultados
 print("O número de meteoros encontrados foi: ", meteors)
 print("O número de estrelas encontradas foi: ", stars)
 print("O número de meteoros que cairão na água é: ", fallOnWater)
+print("Tempo de processamento: ", end - start)
