@@ -13,6 +13,10 @@ blue = (0, 0, 255, 255)
 
 # Vetor usado para gravar coordenadas dos possíveis meteoros
 coords = []
+waterCols = []
+
+groundLvl = -1
+waterLevel = -1
 
 # Contadores
 meteors = 0
@@ -20,10 +24,29 @@ stars = 0
 fallOnWater = 0
 
 # Salvando largura e comprimento da matriz
-w, h, _ = data.shape
+h, w, _ = data.shape
+
+for i in range(0, h):
+    if(tuple(data[i, 352]) == black):
+        groundLvl = i
+        break
+
+for i in range(0, h):
+    if(waterLevel != -1):
+        break
+    for j in range(0, w):
+        if(tuple(data[i, j]) == blue):
+            waterLevel = i
+            break
+
+
+for i in range(0, w):
+    if(tuple(data[waterLevel, i]) == blue):
+        waterCols.append(i)
+
 
 # Itera para contar quantidade de estrelas e meteoros
-for i in range(0, h):
+for i in range(0, groundLvl):
     for j in range(0, w):
         if(tuple(data[i, j]) == red):
             meteors += 1
@@ -32,13 +55,9 @@ for i in range(0, h):
             stars += 1
 
 # itera para verificar a trajetória dos meteoros e ver se atingem a terra
-fallCols = set()
 for i in coords:
-    for j in range(i[0], h):
-        if(tuple(data[j, i[1]]) == blue):
-            fallOnWater += 1
-            fallCols.add(i[1])
-            break
+    if(i[1] in waterCols):
+        fallOnWater += 1
 
 print("O número de meteoros encontrados foi: ", meteors)
 print("O número de estrelas encontradas foi: ", stars)
